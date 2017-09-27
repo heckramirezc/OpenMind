@@ -4047,8 +4047,8 @@ namespace OpenMind.Droid
 			// aapt resource value: 0x7f0200b0
 			public const int mr_ic_play_light = 2130837680;
 			
-			// aapt resource value: 0x7f0200b6
-			public const int notification_template_icon_bg = 2130837686;
+			// aapt resource value: 0x7f0200b7
+			public const int notification_template_icon_bg = 2130837687;
 			
 			// aapt resource value: 0x7f0200b1
 			public const int perfil = 2130837681;
@@ -4057,13 +4057,16 @@ namespace OpenMind.Droid
 			public const int preguntasFrecuentes = 2130837682;
 			
 			// aapt resource value: 0x7f0200b3
-			public const int success = 2130837683;
+			public const int splash_screen = 2130837683;
 			
 			// aapt resource value: 0x7f0200b4
-			public const int warning = 2130837684;
+			public const int success = 2130837684;
 			
 			// aapt resource value: 0x7f0200b5
-			public const int waze = 2130837685;
+			public const int warning = 2130837685;
+			
+			// aapt resource value: 0x7f0200b6
+			public const int waze = 2130837686;
 			
 			static Drawable()
 			{

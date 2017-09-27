@@ -25,10 +25,10 @@ namespace OpenMind.Paginas.Principal
 				TextColor = Color.FromHex("CDCDCD"),
                 BackgroundColor = Color.Transparent,
 				Text = string.Empty,
-                FontSize = 18,
-				HeightRequest = 55,
+                FontSize = 22,
+				HeightRequest = 50,
 				HasBorder = false,
-                Margin = 3,
+                Margin = new Thickness(15,0),
                 VerticalOptions = LayoutOptions.Center
 			};
 
@@ -38,23 +38,37 @@ namespace OpenMind.Paginas.Principal
                 Placeholder = "CONTRASEÑA",
                 PlaceholderColor = Color.FromHex("91a5af"),
                 FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-                TextColor = Color.FromHex("91a5af"),
-                FontSize = 18,
+                TextColor = Color.FromHex("CDCDCD"),
                 BackgroundColor = Color.Transparent,
                 Text = string.Empty,
-                HeightRequest = 55,
-                HasBorder = false,
-                Margin = 3,
+				FontSize = 22,
+				HeightRequest = 50,
+				HasBorder = false,
+				Margin = new Thickness(15, 0),
                 VerticalOptions = LayoutOptions.Center,
-                IsPassword = true
+
 			};
+            Contrasenia.TextChanged+= (sender, e) => 
+            {
+                if(!Contrasenia.IsPassword)
+                {
+                    Contrasenia.IsPassword = true;
+                    Contrasenia.Text = String.Empty;
+                    Contrasenia.Text = e.NewTextValue;
+				}
+            };
+            /*Usuario.Unfocused+= (sender, e) => 
+            {                
+                    
+            };*/
+            /*Contrasenia.Focused+= (sender, e) => { Contrasenia.IsPassword = true; };*/
 
-			//var rond = ;
+				//var rond = ;
 
-			var ingreso = new StackLayout
+				var ingreso = new StackLayout
 			{
 				Orientation = StackOrientation.Vertical,
-				Padding = 0,
+                Padding = new Thickness(20,0),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
 				Spacing = 10,
 				Children =
@@ -62,36 +76,36 @@ namespace OpenMind.Paginas.Principal
 					//Usuario,
                     new Grid
                     {
-                        HeightRequest = 45,
+                        HeightRequest = 50,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         Children =
                         {
-							/*new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
+							new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
                 			{
                 				BackgroundColor = Color.Transparent,
                 				BorderThickness = 2,
                 				CornerRadius = 20,
                 				BorderColor = Color.White,
-                				HeightRequest = 45,
+                				HeightRequest = 50,
                 				HorizontalOptions = LayoutOptions.FillAndExpand,
-                			},*/
+                			},
                             Usuario
                         },
                     },
 					new Grid
 					{
-                        HeightRequest = 45,
+                        HeightRequest = 50,
 						Children =
 						{
-							/*new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
+							new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
 							{
 								BackgroundColor = Color.Transparent,
 								BorderThickness = 2,
 								CornerRadius = 20,
 								BorderColor = Color.White,
-								HeightRequest = 45,
-								WidthRequest = 128,
-							},*/
+								HeightRequest = 50,
+								//WidthRequest = 128,
+							},
 							Contrasenia
 						},
 					}

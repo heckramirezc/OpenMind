@@ -7,11 +7,11 @@
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:windowIsTranslucent">true</item>                
     <item
-            name="colorPrimary">#2196F3</item>    
+            name="colorPrimary">#3E1152</item>    
     <item
-            name="colorPrimaryDark">#19a0e6</item>    
+            name="colorPrimaryDark">#3E1152</item>    
     <item
-            name="colorAccent">#91a5af</item>    
+            name="colorAccent">#CDCDCD</item>    
     <item
             name="windowActionModeOverlay">true</item>
     <item
@@ -68,7 +68,7 @@
             name="colorAccent">#FF4081</item>
   </style>
     <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/Fondo</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowNoTitle">true</item>  
   </style>
 </resources>

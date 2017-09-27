@@ -102,12 +102,6 @@
     <Reference Include="Plugin.Settings">
       <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\MonoAndroid10\Plugin.Settings.dll</HintPath>
     </Reference>
-    <Reference Include="RoundedBoxView.Forms.Plugin.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\MonoAndroid10\RoundedBoxView.Forms.Plugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="RoundedBoxView.Forms.Plugin.Android">
-      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\MonoAndroid10\RoundedBoxView.Forms.Plugin.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
@@ -149,6 +143,12 @@
     <Reference Include="PCLThinCanvas.Droid">
       <HintPath>..\packages\KMY.PCLThinCanvas.0.3.2\lib\MonoAndroid10\PCLThinCanvas.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="RoundedBoxView.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\MonoAndroid10\RoundedBoxView.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="RoundedBoxView.Forms.Plugin.Android">
+      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\MonoAndroid10\RoundedBoxView.Forms.Plugin.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenMind\OpenMind.csproj">
@@ -167,6 +167,7 @@
     <Compile Include="Procesadores\IconViewRenderer.cs" />
     <Compile Include="SQLite_Android.cs" />
     <Compile Include="Procesadores\ExtendedTabbedPageRenderer.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -207,6 +208,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Procesadores\" />

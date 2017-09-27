@@ -9,15 +9,17 @@ using Android.Widget;
 using Android.OS;
 using Plugin.Toasts;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace OpenMind.Droid
 {
-	[Activity(Label = "OpenMind.Droid", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity(Label = "Open Mind", Icon = "@drawable/ic_launcher",  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)
 		{
 			TabLayoutResource = Resource.Layout.Tabbar;
+            FormsAppCompatActivity.ToolbarResource = Resource.Layout.Toolbar;
 			ToolbarResource = Resource.Layout.Toolbar;
 
 			base.OnCreate(bundle);

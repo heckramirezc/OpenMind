@@ -116,12 +116,6 @@
     <Reference Include="Plugin.Settings">
       <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
-    <Reference Include="RoundedBoxView.Forms.Plugin.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\Xamarin.iOS10\RoundedBoxView.Forms.Plugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="RoundedBoxView.Forms.Plugin.iOSUnified">
-      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\Xamarin.iOS10\RoundedBoxView.Forms.Plugin.iOSUnified.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
@@ -159,6 +153,12 @@
     </Reference>
     <Reference Include="PCLThinCanvas.iOS">
       <HintPath>..\packages\KMY.PCLThinCanvas.0.3.2\lib\Xamarin.iOS10\PCLThinCanvas.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="RoundedBoxView.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\Xamarin.iOS10\RoundedBoxView.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="RoundedBoxView.Forms.Plugin.iOSUnified">
+      <HintPath>..\packages\Xam.Plugins.Forms.RoundedBoxView.1.0.0.7\lib\Xamarin.iOS10\RoundedBoxView.Forms.Plugin.iOSUnified.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
