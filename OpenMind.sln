@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMind", "OpenMind\OpenMi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMind.iOS", "iOS\OpenMind.iOS.csproj", "{ABD69328-28A5-4D64-AB54-C6822DE0669E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMind.Droid", "Droid\OpenMind.Droid.csproj", "{CC94C637-8E4B-4FD8-ADFA-47038B596BD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMind", "Droid\OpenMind.csproj", "{CC94C637-8E4B-4FD8-ADFA-47038B596BD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

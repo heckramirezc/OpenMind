@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>OpenMind</string>
+	<string>Open Mind</string>
 	<key>CFBundleName</key>
-	<string>OpenMind</string>
+	<string>Open Mind</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.devssicom.openmind</string>
 	<key>CFBundleShortVersionString</key>
@@ -30,8 +30,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -42,5 +40,26 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Montserrat-Black.ttf</string>
+		<string>Fonts/Montserrat-BlackItalic.ttf</string>
+		<string>Fonts/Montserrat-Bold.ttf</string>
+		<string>Fonts/Montserrat-BoldItalic.ttf</string>
+		<string>Fonts/Montserrat-ExtraBold.ttf</string>
+		<string>Fonts/Montserrat-ExtraBoldItalic.ttfo</string>
+		<string>Fonts/Montserrat-ExtraLight.ttf</string>
+		<string>Fonts/Montserrat-ExtraLightItalic.ttf</string>
+		<string>Fonts/Montserrat-Italic.ttf</string>
+		<string>Fonts/Montserrat-Light.ttf</string>
+		<string>Fonts/Montserrat-LightItalic.ttf</string>
+		<string>Fonts/Montserrat-Medium.ttf</string>
+		<string>Fonts/Montserrat-MediumItalic.ttf</string>
+		<string>Fonts/Montserrat-Regular.ttf</string>
+		<string>Fonts/Montserrat-SemiBold.ttf</string>
+		<string>Fonts/Montserrat-SemiBoldItalic.ttf</string>
+		<string>Fonts/Montserrat-Thin.ttf</string>
+		<string>Fonts/Montserrat-ThinItalic.ttf</string>
+	</array>
 </dict>
 </plist>

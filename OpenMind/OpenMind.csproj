@@ -28,32 +28,143 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="OpenMindPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OpenMindPage.xaml.cs">
-      <DependentUpon>OpenMindPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App.cs" />
+    <Compile Include="Data\OpenMindDatabase.cs" />
+    <Compile Include="Modelos\SQLite\ISQLite.cs" />
+    <Compile Include="Paginas\Principal\PrincipalTP.cs" />
+    <Compile Include="Data\ManejadorDatos.cs" />
+    <Compile Include="Paginas\Cursos\CursosVista.xaml.cs">
+      <DependentUpon>CursosVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Principal\InicioSesion.cs" />
+    <Compile Include="Helpers\ExtendedEntry.cs" />
+    <Compile Include="Data\ServicioWeb.cs" />
+    <Compile Include="Data\IServicioWeb.cs" />
+    <Compile Include="Modelos\Usuario\UsuarioPeticion.cs" />
+    <Compile Include="Data\Constantes.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="ControlesPersonalizados\IconView.cs" />
+    <Compile Include="Paginas\Entrada\EntradaVista.xaml.cs">
+      <DependentUpon>EntradaVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\FAQ\FAQVista.xaml.cs">
+      <DependentUpon>FAQVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Perfil\PerfilVista.xaml.cs">
+      <DependentUpon>PerfilVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Info\InfoVista.xaml.cs">
+      <DependentUpon>InfoVista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Perfil\MiPerfil.xaml.cs">
+      <DependentUpon>MiPerfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modelos\Entrada\EntradaPeticion.cs" />
+    <Compile Include="Helpers\Accordion.cs" />
+    <Compile Include="Paginas\Cursos\CursosAgrupacionModeloVista.cs" />
+    <Compile Include="Modelos\SQLite\cursos.cs" />
+    <Compile Include="Modelos\Alumno\AlumnoPeticion.cs" />
+    <Compile Include="Paginas\FAQ\FAQsAgrupacionModeloVista.cs" />
+    <Compile Include="Modelos\SQLite\faqs.cs" />
+    <Compile Include="Modelos\FAQs\FAQsPeticion.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\netstandard1.0\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\netstandard1.0\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCL.raw">
+      <HintPath>..\packages\SQLitePCL.raw.0.9.2\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCL.raw.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCL.batteries">
+      <HintPath>..\packages\SQLitePCL.bundle_green.0.9.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCL.batteries.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net">
+      <HintPath>..\packages\sqlite-net-pcl.1.1.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Toasts.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Toasts.Forms.Plugin.2.0.4\lib\portable-net45+wp8+win8+wpa81+netcore451+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Toasts.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.Xam.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.1.5.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Refractored.Xam.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.Xam.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.1.5.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Refractored.Xam.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PCLThinCanvas.Core">
+      <HintPath>..\packages\KMY.PCLThinCanvas.0.3.2\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\PCLThinCanvas.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLThinCanvas">
+      <HintPath>..\packages\KMY.PCLThinCanvas.0.3.2\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\PCLThinCanvas.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Paginas\" />
+    <Folder Include="Modelos\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Modelos\SQLite\" />
+    <Folder Include="Paginas\Principal\" />
+    <Folder Include="Paginas\Cursos\" />
+    <Folder Include="Modelos\Usuario\" />
+    <Folder Include="ControlesPersonalizados\" />
+    <Folder Include="Paginas\Perfil\" />
+    <Folder Include="Paginas\Entrada\" />
+    <Folder Include="Paginas\FAQ\" />
+    <Folder Include="Paginas\Info\" />
+    <Folder Include="Modelos\Entrada\" />
+    <Folder Include="Modelos\Alumno\" />
+    <Folder Include="Modelos\FAQs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Paginas\Cursos\CursosVista.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paginas\Entrada\EntradaVista.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paginas\FAQ\FAQVista.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paginas\Perfil\PerfilVista.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paginas\Info\InfoVista.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paginas\Perfil\MiPerfil.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

@@ -7,10 +7,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.Toasts;
+using Xamarin.Forms;
 
 namespace OpenMind.Droid
 {
-	[Activity(Label = "OpenMind.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity(Label = "OpenMind.Droid", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)
@@ -21,8 +23,10 @@ namespace OpenMind.Droid
 			base.OnCreate(bundle);
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
-
+			DependencyService.Register<ToastNotificatorImplementation>();
+			ToastNotificatorImplementation.Init(this);
 			LoadApplication(new App());
 		}
 	}
+
 }
