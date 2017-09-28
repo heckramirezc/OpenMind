@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using OpenMind.ControlesPersonalizados;
 using OpenMind.Modelos.SQLite;
 using Xamarin.Forms;
 
@@ -38,26 +39,49 @@ namespace OpenMind
                     }
 				};
 
+                StackLayout ContenidoCursos = new StackLayout();                			
 
-
-				var fBody = new Frame
-				{
-					Padding = new Thickness(0, 0, 0, 0),
-					OutlineColor = Color.FromHex("3E1152"),
-					HorizontalOptions = LayoutOptions.CenterAndExpand,
-					HasShadow = false,
-					Content = Grid
-				};
-				StackLayout ContenidoCursos = new StackLayout
-				{
-					IsVisible = true,
-					Spacing = 5,
-					VerticalOptions = LayoutOptions.FillAndExpand,
-					Children =
-					{
-						fBody
-					}
-				};
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.iOS:
+						ContenidoCursos = new StackLayout
+						{
+							IsVisible = true,
+							Spacing = 5,
+							VerticalOptions = LayoutOptions.FillAndExpand,
+							Children =
+        					{
+                                new Frame
+                				{
+                					Padding = new Thickness(0, 0, 0, 0),
+                					OutlineColor = Color.FromHex("3E1152"),
+                					HorizontalOptions = LayoutOptions.CenterAndExpand,                					
+                					Content = Grid
+                				}
+        					}
+						};
+                        break;
+                    case Device.Android:
+						ContenidoCursos = new StackLayout
+						{
+							IsVisible = true,
+							Spacing = 5,
+							VerticalOptions = LayoutOptions.FillAndExpand,
+							Children =
+							{
+								new CustomFrame
+                				{
+                					Padding = new Thickness(0, 0, 0, 0),
+                					OutlineColor = Color.FromHex("3E1152"),
+                					HorizontalOptions = LayoutOptions.CenterAndExpand,
+                					BorderRadius = Device.OnPlatform(6, 15, 12),
+                					Content = Grid
+                				}
+							}
+						};
+                    break;
+                }
+				
 
 				return ContenidoCursos;
 			}

@@ -44,7 +44,7 @@ namespace OpenMind.Droid.Procesadores
 				else if (v is TabLayout)
 				{
 					_tabLayout = (TabLayout)v;
-					_tabLayout.GetTabAt(i).SetText("HOLA");
+					//_tabLayout.GetTabAt(i).SetText("HOLA");
 				}
 			}
 

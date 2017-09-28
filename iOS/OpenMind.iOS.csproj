@@ -9,6 +9,7 @@
     <RootNamespace>OpenMind.iOS</RootNamespace>
     <AssemblyName>OpenMind.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <ReleaseVersion>1.0.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +46,7 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>(AdHoc)Open Mind</CodesignProvision>
+    <CodesignProvision>(AppStore)Open Mind</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -80,7 +81,7 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>(Dev)Open Mind</CodesignProvision>
+    <CodesignProvision>(Dev) Open Mind</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -192,6 +193,10 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -215,6 +220,7 @@
     <Compile Include="Procesadores\ExtendedEntryRenderer.cs" />
     <Compile Include="Procesadores\IconViewRenderer.cs" />
     <Compile Include="SQLite_iOS.cs" />
+    <Compile Include="Procesadores\CustomFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon.png" />
@@ -299,6 +305,8 @@
     <BundleResource Include="Resources\info%403x.png" />
     <BundleResource Include="Resources\perfil%402x.png" />
     <BundleResource Include="Resources\perfil%403x.png" />
+    <BundleResource Include="Resources\iPassView.png" />
+    <BundleResource Include="Resources\iCancelarEdicion.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />

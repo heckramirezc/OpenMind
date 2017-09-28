@@ -61,5 +61,9 @@
 		<string>Fonts/Montserrat-Thin.ttf</string>
 		<string>Fonts/Montserrat-ThinItalic.ttf</string>
 	</array>
+	<key>XSLaunchImageAssets</key>
+	<string>Assets.xcassets/LaunchImage.launchimage</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

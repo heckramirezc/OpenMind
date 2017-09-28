@@ -49,6 +49,22 @@ namespace OpenMind.Paginas.Cursos
 				System.Diagnostics.Debug.WriteLine((ex.StackTrace));
 			}
 
+            Label contactar = new Label
+            {
+                Text = "¿Tienes dudas? contáctanos.",
+                TextColor = Color.FromHex("3E1152"),
+                FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
+                FontSize = 14,
+                Margin = new Thickness(0, 0, 0, 20),
+                VerticalOptions = LayoutOptions.End,
+                HorizontalOptions = LayoutOptions.Center
+            };
+			var tap2 = new TapGestureRecognizer();
+			tap2.Tapped += (s, e) =>
+			{
+				Device.OpenUri(new Uri("https://goo.gl/F2LzXD"));
+			};
+			contactar.GestureRecognizers.Add(tap2);
 			Content = new StackLayout
 			{
 				Children =
@@ -77,16 +93,7 @@ namespace OpenMind.Paginas.Cursos
                         }
                     },
                     Contenido,
-					new Label
-        			{
-        				Text = "¿Tienes dudas? contáctanos.",
-        				TextColor = Color.FromHex("3E1152"),
-        				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-        				FontSize = 14,
-        				Margin = new Thickness(0,0,0,20),
-                        VerticalOptions = LayoutOptions.End,
-        				HorizontalOptions = LayoutOptions.Center
-        			},
+					contactar,
 					new BoxView
 					{
 						BackgroundColor = Color.FromHex("3E1152"),

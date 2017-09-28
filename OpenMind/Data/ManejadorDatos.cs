@@ -22,7 +22,7 @@ namespace OpenMind.Data
 
         public Task<String> reloadmailAsync(reloadmail peticion)
 		{
-			return ServicioWeb.confirmUserAsync(peticion);
+            return ServicioWeb.reloadmailAsync(peticion);
 		}
 
         public Task<String> changepasswordAsync(changepassword peticion)

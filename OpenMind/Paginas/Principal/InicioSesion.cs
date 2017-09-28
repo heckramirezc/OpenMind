@@ -11,15 +11,21 @@ namespace OpenMind.Paginas.Principal
 {
     public class InicioSesion : ContentPage
     {
+        StackLayout content_ingreso;
         ExtendedEntry Usuario, Contrasenia;
 		Label forget, contactenos;
 		Button login;
         public InicioSesion()
         {
+            MessagingCenter.Subscribe<CambioContrasenia>(this, "Cambio", (sender) =>
+			{
+                Usuario.Text = sender.user;
+                Contrasenia.Text = sender.contrasenia.Text.Trim();
+			});
 			Usuario = new ExtendedEntry()
 			{
 				AutomationId = "LoginUser",
-                Keyboard = Keyboard.Telephone,
+                Keyboard = Keyboard.Text,
 				Placeholder = "USUARIO",
 				PlaceholderColor = Color.FromHex("91a5af"),
 				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
@@ -118,7 +124,7 @@ namespace OpenMind.Paginas.Principal
                 Margin = new Thickness(50,0)
 			};
             
-			var content_ingreso = new StackLayout
+			content_ingreso = new StackLayout
 			{   
                 VerticalOptions = LayoutOptions.CenterAndExpand,
 				Spacing = 25,				
@@ -164,7 +170,9 @@ namespace OpenMind.Paginas.Principal
 			};
 
             contactenos = new Label
-			{                
+			{
+				//https://goo.gl/yAnQD4
+				//https://waze.com/ul?ll=14.52459,-90.76137
 				Text = "¿Tienes dudas? contáctanos.",
 				TextColor = Color.FromHex("f7efd9"),
 				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
@@ -173,6 +181,14 @@ namespace OpenMind.Paginas.Principal
                 VerticalOptions = LayoutOptions.EndAndExpand,
 				HorizontalOptions = LayoutOptions.Center
 			};
+			var tap2 = new TapGestureRecognizer();
+            tap2.Tapped += (s, e) => 
+            {
+                Device.OpenUri(new Uri("https://goo.gl/F2LzXD"));
+            };
+			contactenos.GestureRecognizers.Add(tap2);
+
+
 			var tap = new TapGestureRecognizer();
 			tap.Tapped += (s, e) => Forget_Clicked();
             forget.GestureRecognizers.Add(tap);
@@ -198,9 +214,8 @@ namespace OpenMind.Paginas.Principal
 		}
 
         private async void Forget_Clicked()
-        {
-            await Navigation.PushPopupAsync(new CambioContrasenia(Usuario.Text.Trim(), Contrasenia.Text.Trim()));
-            //await Navigation.PushPopupAsync(new Forget());
+        {            
+            await Navigation.PushPopupAsync(new Forget(Usuario.Text));
         }
 
         private void Login_Clicked(object sender, EventArgs e)
@@ -277,10 +292,19 @@ namespace OpenMind.Paginas.Principal
                     }
                     else
                     {
+                        content_ingreso.IsVisible = false;
                         await Navigation.PushPopupAsync(new CambioContrasenia(Usuario.Text.Trim(), Contrasenia.Text.Trim()));      
                     }
                 }
 			}
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            content_ingreso.IsVisible = true;
+            IsBusy = false;
+            login.IsVisible = true;
+            login.IsEnabled = true;
         }
 		private async void ShowToast(ToastNotificationType type, string titulo, string descripcion, int tiempo)
 		{

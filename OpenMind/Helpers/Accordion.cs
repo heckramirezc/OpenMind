@@ -51,7 +51,7 @@ namespace OpenMind.Helpers
 					{
 						Content = vSingleItem.Contenido,
 						IsVisible = false,
-                        Padding = new Thickness(0,-10,0,5)
+                        Padding = new Thickness(0,-13,0,5)
 					};
 					if (vFirst)
 					{

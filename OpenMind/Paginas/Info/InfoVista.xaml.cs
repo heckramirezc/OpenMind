@@ -100,7 +100,7 @@ namespace OpenMind.Paginas.Info
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped+= (sender, e) => 
             {
-                
+                Device.OpenUri(new Uri("https://goo.gl/yAnQD4"));
             };
 
             waze.GestureRecognizers.Add(tap);
@@ -111,30 +111,49 @@ namespace OpenMind.Paginas.Info
                     new ScrollView
                     {                        
                         VerticalOptions = LayoutOptions.FillAndExpand,
-						Padding = new Thickness(40,0),				
+						Padding = new Thickness(30,0),				
                         Content= new StackLayout
                         {
 							HorizontalOptions = LayoutOptions.Center,
-            				Spacing = 20,
-            				Padding = new Thickness(0, 20, 0, 0),
+            				Spacing = 10,
+            				//Padding = new Thickness(0, 15, 0, 0),
                             Children = 
                             {
 								new Image
             					{
             						Source = "logoColor.png",
+                                    Margin = new Thickness(0, 15, 0, 0),
             						WidthRequest = 175,
             						HeightRequest = 175,
             						HorizontalOptions = LayoutOptions.Center
             					},
             					new Label
             					{
-            						Text = "Con el fin de enriquecer los conocimientos año con año se lleva a cabo el seminario de la carrera de Ingeniería en sistemas de la Universidad Mariano Gálvez. \r\n\nEn esta ocasión el seminario lleva el nombre de OPENMIND, y contara con la participación de los expositores:\r\n\n\ta.\tIngeniero Danilo Escobar: Quien impartirá la charla de Open Source Intelligence.\r\n\tb.\tIngeniero Amílcar de León: Con el tema Hacking Ético.\r\n\nEste año se contara con una visión ecológica por lo cual nosotros como curso de Sistemas Gerenciales optimizaremos los procesos de uso de papel y se empleara únicamente medios electrónicos.\r",
+                                    Text = "Con el fin de enriquecer los conocimientos anualmente se lleva a cabo el seminario de la carrera de Ingeniería en Sistemas de la Universidad Mariano Gálvez de Guatemala en el Centro Universitario de Antigua Guatemala, Sacatepéquez. \r\n\nEn esta ocasión el seminario se denomina OPENMIND en el cual contaremos con la participación de los expositores:",
             						FontSize = 12,
                                     HorizontalTextAlignment = TextAlignment.Center,
             						HorizontalOptions = LayoutOptions.FillAndExpand,
             						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
             						TextColor = Color.FromHex("262626"),
             					},
+								new Label
+								{
+									Text = "Ing. Danilo Escobar\r\n-Open Source Intelligence.\r\n\r\nIng. Amílcar de León \r\n-Hacking Ético.",
+									FontSize = 12,
+                                    HorizontalTextAlignment = TextAlignment.Center,
+									HorizontalOptions = LayoutOptions.FillAndExpand,
+									FontFamily = Device.OnPlatform("Montserrat-Bold", "Montserrat-Bold", null),
+									TextColor = Color.FromHex("262626"),
+								},
+								new Label
+								{
+									Text = "Este año se contara con una visión ecológica por lo cual el curso de Sistemas de Información Gerencial optimizaremos los procesos de uso de papel y se empleara únicamente medios electrónicos.\r",
+									FontSize = 12,
+									HorizontalTextAlignment = TextAlignment.Center,
+									HorizontalOptions = LayoutOptions.FillAndExpand,
+									FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
+									TextColor = Color.FromHex("262626"),
+								},
             					Info,
 								new BoxView
             					{

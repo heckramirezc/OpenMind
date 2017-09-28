@@ -41,15 +41,25 @@ namespace OpenMind.Paginas.Principal
 		}
 
         protected override void OnCurrentPageChanged()
-        {
+        {			
             base.OnCurrentPageChanged();
-            Perfill();
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    Perfill();
+                    break;
+            }
+
         }
 
         public async void Perfill()
         {
             if (CurrentPage == perfil)
-                await Navigation.PushModalAsync(new MiPerfil());                           
+            {
+                MessagingCenter.Send<PrincipalTP>(this, "Desactivar");
+                await Navigation.PushModalAsync(new MiPerfil());
+			}
+                                   
         }
 
 		async public void MostrarEntrada()

@@ -4,6 +4,11 @@
     <bitmap
         android:src="@drawable/fondo"
         android:tileMode="disabled"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"/>	
+  </item>
+  <item>
+    <bitmap        
+        android:gravity="center"
+        android:src="@drawable/logos"/>
   </item>
 </layer-list>

@@ -7,8 +7,13 @@ namespace OpenMind.Paginas.Perfil
 {
     public partial class PerfilVista : ContentPage
     {
+        bool mostrar = true;
         public PerfilVista()
         {
+            MessagingCenter.Subscribe<Principal.PrincipalTP>(this, "Desactivar", (sender) =>
+			{
+                mostrar = false;
+			});
             InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -16,6 +21,18 @@ namespace OpenMind.Paginas.Perfil
         async protected override void OnAppearing()
         {
             base.OnAppearing();
+			switch (Device.RuntimePlatform)
+			{
+				case Device.iOS:
+					await Navigation.PushModalAsync(new MiPerfil());
+					break;
+                case Device.Android:
+                    if(!Data.Constantes.PerfilAbierto && mostrar)
+                    {
+                        await Navigation.PushModalAsync(new MiPerfil());
+                    }
+                    break;
+			}
         }
 
         public void MostrarEntrada()

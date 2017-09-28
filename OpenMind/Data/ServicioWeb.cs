@@ -63,8 +63,12 @@ namespace Medicloud.Data
 			try
 			{
 				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri);
-				string json = JsonConvert.SerializeObject(peticion);
-                var solicitud = await cliente.PostAsync(Constantes.URL_Users_reloadmail, new StringContent(json, Encoding.Unicode, "application/json"));
+				//string json = JsonConvert.SerializeObject(peticion);
+				FormUrlEncodedContent Peticion = new FormUrlEncodedContent(new[]
+				{
+                    new KeyValuePair<string,string>("nocarnet", peticion.nocarnet)
+				});
+                var solicitud = await cliente.PostAsync(Constantes.URL_Users_reloadmail, Peticion);
 				System.Diagnostics.Debug.WriteLine("SOLICITUD: " + solicitud);
 				solicitud.EnsureSuccessStatusCode();
 

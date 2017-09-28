@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="OpenMind.Paginas.Cursos.CursosVista"
     Icon="cursos.png"
-    Title="Cursos">
+    Title="Cursos"
+    BackgroundColor = "White">
 	<ContentPage.Content>
 	</ContentPage.Content>
 </ContentPage>

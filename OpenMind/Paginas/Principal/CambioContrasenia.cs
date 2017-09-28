@@ -18,76 +18,19 @@ using Plugin.Toasts;
 namespace OpenMind.Paginas.Principal
 {
 	public partial class CambioContrasenia : PopupPage
-	{
-		String PwdReset_ID;
-		public ExtendedEntry Usuario, contrasenia;
-		ExtendedEntry codigo, confirmacionContrasenia;
-		Button recuperar, continuar, cambiar;
-		StackLayout envioCodigo, confirmacionCodigo, cambioContrasenia;
-		public bool Logeado;
-		RelativeLayout gridBotonRecuperar;
-        String user, pass;
+	{		
+		public ExtendedEntry contrasenia;
+		ExtendedEntry confirmacionContrasenia;
+		Button  cambiar;
+		StackLayout cambioContrasenia;
+		public bool Logeado;		
+        public String user, pass;
 
 		public CambioContrasenia(String user, String pass)
 		{
             this.user = user;
             this.pass = pass;
-			Usuario = new ExtendedEntry()
-			{
-				Keyboard = Keyboard.Email,
-				HasBorder = false,
-				IsPassword = false,
-				Placeholder = "Toca para ingresar",
-				PlaceholderColor = Color.FromHex("91a5af"),
-				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-				TextColor = Color.FromHex("CDCDCD"),
-				XAlign = TextAlignment.End,
-				FontSize = 14,
-				Margin = 0,
-				ReturnKeyType = ReturnKeyTypes.Go
-			};
-			Usuario.Completed += (sender, e) => { Usuario.Unfocus(); recuperacion(); };
-			codigo = new ExtendedEntry
-			{
-				Keyboard = Keyboard.Numeric,
-				TextColor = Color.FromHex("3F3F3F"),
-				HasBorder = false,
-				IsPassword = false,
-				Placeholder = "Toca para ingresar",
-				PlaceholderColor = Color.FromHex("B2B2B2"),
-				XAlign = TextAlignment.End,
-				FontFamily = Device.OnPlatform("OpenSans-Bold", "OpenSans-Bold", null),
-				FontSize = 14,
-				Margin = new Thickness(0, 0, 35, 0)
-			};
-			codigo.TextChanged += (sender, e) =>
-			{
-				if (!codigo.Text.Equals(PwdReset_ID))
-				{
-					codigo.TextColor = Color.FromHex("E9242A");
-				}
-				else
-				{
-					codigo.TextColor = Color.FromHex("53A946");
-				}
-			};
-
-			IconView emailView = new IconView
-			{
-				HorizontalOptions = LayoutOptions.End,
-				VerticalOptions = LayoutOptions.Center,
-				Source = "email.png",
-				Foreground = Color.FromHex("B2B2B2"),
-				WidthRequest = 20
-			};
-			IconView codigoView = new IconView
-			{
-				HorizontalOptions = LayoutOptions.End,
-				VerticalOptions = LayoutOptions.Center,
-				Source = "iSeguridad.png",
-				Foreground = Color.FromHex("B2B2B2"),
-				WidthRequest = 15
-			};
+			
 			IconView contraseniaView = new IconView
 			{
 				HorizontalOptions = LayoutOptions.End,
@@ -141,36 +84,7 @@ namespace OpenMind.Paginas.Principal
 			contraseniaConfirmacionView.GestureRecognizers.Add(contraseniaConfirmacionViewTAP);
 
 
-			recuperar = new Button
-			{
-				Text = "RECUPERAR",
-				VerticalOptions = LayoutOptions.Start,
-				TextColor = Color.FromHex("ffffff"),
-				FontFamily = Device.OnPlatform("Montserrat-Bold", "Montserrat-Bold", null),
-				FontSize = 15,
-				HorizontalOptions = LayoutOptions.Center,
-				BackgroundColor = Color.FromHex("3E1152"),
-				WidthRequest = 200,
-				HeightRequest = 35,
-				BorderRadius = 20,
-			};
-			recuperar.Clicked += Recuperar_Clicked;
-
-
-
-			continuar = new Button
-			{
-				Text = "VALIDAR",
-				FontSize = 18,
-				TextColor = Color.White,
-				FontAttributes = FontAttributes.Bold,
-				FontFamily = Device.OnPlatform("OpenSans-Bold", "OpenSans-Bold", null),
-				VerticalOptions = LayoutOptions.Start,
-				BackgroundColor = Color.FromHex("53A946"),
-				WidthRequest = 128,
-				HeightRequest = 38,
-			};
-			continuar.Clicked += Continuar_Clicked;
+			
 
 			cambiar = new Button
 			{
@@ -187,78 +101,7 @@ namespace OpenMind.Paginas.Principal
 			};
 			cambiar.Clicked += Cambiar_Clicked;
 
-			gridBotonRecuperar = new RelativeLayout
-			{
-				WidthRequest = 130,
-				HeightRequest = 42,
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.End,
-			};
-			gridBotonRecuperar.Children.Add(
-			new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
-			{
-				BackgroundColor = Color.FromHex("B2B2B2"),
-				CornerRadius = 6,
-				HeightRequest = 40,
-				WidthRequest = 128,
-			}, Constraint.Constant(2), Constraint.Constant(2));
-			gridBotonRecuperar.Children.Add(recuperar, Constraint.Constant(0), Constraint.Constant(0));
-
-
-			RelativeLayout gridBotonValidar = new RelativeLayout
-			{
-				WidthRequest = 130,
-				HeightRequest = 42,
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.End,
-			};
-			gridBotonValidar.Children.Add(
-			new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
-			{
-				BackgroundColor = Color.FromHex("B2B2B2"),
-				CornerRadius = 6,
-				HeightRequest = 40,
-				WidthRequest = 128,
-			}, Constraint.Constant(2), Constraint.Constant(2));
-			gridBotonValidar.Children.Add(continuar, Constraint.Constant(0), Constraint.Constant(0));
-
-			RelativeLayout gridBoton = new RelativeLayout
-			{
-				WidthRequest = 140,
-				HeightRequest = 42,
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.End,
-			};
-			gridBoton.Children.Add(
-			new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
-			{
-				BackgroundColor = Color.FromHex("B2B2B2"),
-				CornerRadius = 6,
-				HeightRequest = 40,
-				WidthRequest = 138,
-			}, Constraint.Constant(2), Constraint.Constant(2));
-			gridBoton.Children.Add(cambiar, Constraint.Constant(0), Constraint.Constant(0));
-
-
-			IconView cerrar = new IconView
-			{
-				//Margin = new Thickness(0, 0, 10, 0),
-				HorizontalOptions = LayoutOptions.End,
-				//Source = EstilosCita.Iconos.Cancelar,
-				Foreground = Color.FromHex("a2b3bb"),
-				WidthRequest = 20,
-				HeightRequest = 20
-			};
-			TapGestureRecognizer cerrarTAP = new TapGestureRecognizer();
-			cerrarTAP.Tapped += async (sender, e) =>
-			{
-				bool accion = await DisplayAlert("", "¿Desea cancelar la recuperación?", "Cancelar", "Regresar");
-				if (accion)
-					await Navigation.PopPopupAsync();
-			};
-			cerrar.GestureRecognizers.Add(cerrarTAP);
-
-
+			
 			var indicador = new ActivityIndicator
 			{
 				IsVisible = true,
@@ -269,113 +112,6 @@ namespace OpenMind.Paginas.Principal
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 			};
 			indicador.SetBinding(ActivityIndicator.IsVisibleProperty, "IsBusy");
-
-
-            envioCodigo = new StackLayout
-            {
-                IsVisible = false,
-				Padding = new Thickness(20, 5),
-				Spacing = 25,
-				Children =
-				{
-					new Label
-					{
-						Text = "RECUPERACIÓN DE CONTRASEÑA",
-						HorizontalTextAlignment = TextAlignment.Center,
-						TextColor = Color.FromHex("3E1152"),
-						FontFamily = Device.OnPlatform("Montserrat-Bold", "Montserrat-Bold", null),
-						FontSize = 18,
-						VerticalOptions = LayoutOptions.Center
-					},
-					new StackLayout
-					{
-						Spacing = 0,
-						Children =
-						{
-							new Label
-							{
-								Text ="USUARIO: *",
-								FontSize = 13,
-								TextColor = Color.FromHex("3E1152"),
-								FontFamily = Device.OnPlatform("Montserrat-Bold", "Montserrat-Bold", null),
-							},
-							new StackLayout
-							{
-								Spacing=1,
-								Children=
-								{
-
-									new Grid
-									{
-										Children=
-										{
-											Usuario,
-											emailView
-										}
-									},
-									new BoxView {BackgroundColor= Color.FromHex("3E1152"), HeightRequest=2 },
-									new BoxView {HeightRequest=0 }
-								}
-							}
-						}
-					},
-					
-					recuperar
-				}
-			};
-
-			confirmacionCodigo = new StackLayout
-			{
-				IsVisible = false,
-				Padding = new Thickness(20, 5),
-				Spacing = 25,
-				Children =
-				{
-					new Label
-					{
-						Text = "Ingresa el código \r\nque has recibido \r\nen tu badeja de entrada",
-						HorizontalTextAlignment = TextAlignment.Center,
-						TextColor = Color.FromHex("007D8C"),
-						FontFamily = Device.OnPlatform("OpenSans-Bold", "OpenSans-Bold", null),
-						FontSize = 18,
-						VerticalOptions = LayoutOptions.Center
-					},
-					new StackLayout
-					{
-						Spacing = 0,
-						Children =
-						{
-							new Label
-							{
-								Text ="CÓDIGO DE SEGURIDAD: *",
-								FontSize = 13,
-								TextColor = Color.FromHex("007D8C"),
-								FontAttributes = FontAttributes.Bold,
-								FontFamily = Device.OnPlatform("OpenSans-Bold", "OpenSans-Bold", null)
-							},
-							new StackLayout
-							{
-								Spacing=1,
-								Children=
-								{
-									new Grid
-									{
-										Children=
-										{
-											codigo,
-											codigoView
-										}
-									},
-									new BoxView {BackgroundColor= Color.FromHex("007D8C"), HeightRequest=2 },
-									new BoxView {HeightRequest=0 }
-								}
-							}
-						}
-					},
-					gridBotonValidar
-				}
-			};
-
 
 			contrasenia = new ExtendedEntry
 			{
@@ -389,7 +125,7 @@ namespace OpenMind.Paginas.Principal
 				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
 				TextColor = Color.FromHex("CDCDCD"),
 				FontSize = Device.OnPlatform(16, 18, 12),
-				Margin = 0,
+                Margin = new Thickness(0,0,35,0),
                 ReturnKeyType = ReturnKeyTypes.Next
 			};
             contrasenia.Completed += (sender, e) => { confirmacionContrasenia.Focus(); };
@@ -406,7 +142,7 @@ namespace OpenMind.Paginas.Principal
 				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
 				TextColor = Color.FromHex("CDCDCD"),
 				FontSize = Device.OnPlatform(16, 18, 12),
-				Margin = 0,
+				Margin = new Thickness(0, 0, 35, 0),
                 ReturnKeyType = ReturnKeyTypes.Go
 			};
             confirmacionContrasenia.Completed += (sender, e) => { recuperacion(); };
@@ -539,7 +275,6 @@ namespace OpenMind.Paginas.Principal
 					Padding = 5,
 					Spacing = 0,
 					Children = {
-						cerrar,
 						new ScrollView
 						{
 							Padding= 0,
@@ -548,9 +283,7 @@ namespace OpenMind.Paginas.Principal
 							Content = new StackLayout
 							{
 								Children =
-								{
-									envioCodigo,
-									confirmacionCodigo,
+								{									
 									cambioContrasenia
 								}
 							}
@@ -563,38 +296,7 @@ namespace OpenMind.Paginas.Principal
 			confirmacionContrasenia.IsPassword = true;
 		}
 
-		async void Continuar_Clicked(object sender, EventArgs e)
-		{
-			if (String.IsNullOrEmpty(codigo.Text))
-			{
-				await DisplayAlert("", "Por favor, ingrese el código enviado.", "Aceptar");
-				codigo.Focus();
-				return;
-			}
-			else
-			{
-				if (!String.IsNullOrEmpty(PwdReset_ID))
-				{
-					if (codigo.Text.Equals(PwdReset_ID))
-					{
-						confirmacionCodigo.IsVisible = false;
-						cambioContrasenia.IsVisible = true;
-					}
-					else
-					{
-						await DisplayAlert("", "El código ingresado no coincide con el enviado.", "Aceptar");
-						codigo.Focus();
-						return;
-					}
-				}
-				else
-				{
-					ShowToast(ToastNotificationType.Error, "Recuperación de contraseña", "Servicio no disponible, intente más tarde.", 7);
-					await Navigation.PopPopupAsync();
-				}
-			}
-		}
-
+		
 
 
 		async void Cambiar_Clicked(object sender, EventArgs e)
@@ -665,11 +367,7 @@ namespace OpenMind.Paginas.Principal
 			cambiar.IsEnabled = true;			
 		}
 
-		void Recuperar_Clicked(object sender, EventArgs e)
-		{
-			recuperacion();
-		}
-
+		
 		private async void ShowToast(ToastNotificationType type, string titulo, string descripcion, int tiempo)
 		{
 			var notificator = DependencyService.Get<IToastNotificator>();
@@ -721,6 +419,7 @@ namespace OpenMind.Paginas.Principal
 			{
 				ShowToast(ToastNotificationType.Error, "Verifique sus datos de inicio de sesión", "Los datos de acceso proporcionados son erroneos.", 5);				
 				this.IsBusy = false;
+                MessagingCenter.Send<CambioContrasenia>(this, "Cambio");
 			}
 			else
 			{				
@@ -732,7 +431,7 @@ namespace OpenMind.Paginas.Principal
 					Settings.session_refresh_token = session.refresh_token;
 					Settings.session_expires_in = session.expires_in;
 					Settings.session_scope = session.scope;
-					Settings.session_carne = Usuario.Text.Trim();
+                    Settings.session_carne = user.Trim();
                     await Navigation.PopAllPopupAsync();
                     MessagingCenter.Send<CambioContrasenia>(this, "Autenticado");
 				}

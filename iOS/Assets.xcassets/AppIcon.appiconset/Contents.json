@@ -84,21 +84,25 @@
       "idiom": "ipad"
     },
     {
+      "filename": "Icon-App-83.5x83.5@2x.png",
       "size": "83.5x83.5",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
+      "filename": "Icon-App-76x76@1x.png",
       "size": "76x76",
       "scale": "1x",
       "idiom": "ipad"
     },
     {
+      "filename": "Icon-App-76x76@2x.png",
       "size": "76x76",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
+      "filename": "iTunesArtwork@2x.png",
       "size": "1024x1024",
       "scale": "1x",
       "idiom": "ios-marketing"

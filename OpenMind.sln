@@ -54,4 +54,7 @@ Global
 		{CC94C637-8E4B-4FD8-ADFA-47038B596BD0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{CC94C637-8E4B-4FD8-ADFA-47038B596BD0}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		version = 1.0.2
+	EndGlobalSection
 EndGlobal

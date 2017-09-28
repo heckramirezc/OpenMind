@@ -181,6 +181,17 @@ namespace OpenMind.Paginas.Perfil
             await Navigation.PopModalAsync();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Data.Constantes.PerfilAbierto = true;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Data.Constantes.PerfilAbierto = false;
+        }
 
     }
 }

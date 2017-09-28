@@ -8,8 +8,8 @@ using OpenMind.Modelos.Usuario;
 
 namespace OpenMind.Data
 {
-	public interface IServicioWeb
-	{		
+    public interface IServicioWeb
+    {        
         Task<String> confirmUserAsync(confirmUser peticion);
         Task<String> reloadmailAsync(reloadmail peticion);
         Task<String> changepasswordAsync(changepassword peticion);
@@ -17,5 +17,5 @@ namespace OpenMind.Data
         Task GetQRAsync(EntradaQR peticion);
         Task infoAlumnoAsync(AlumnoPeticion peticion);
         Task GetFAQssync();
-	}
+    }
 }
