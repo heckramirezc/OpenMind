@@ -46,6 +46,18 @@ namespace OpenMind.iOS
 				ResizeHeight();
 			}
 
+			if ((Control != null) && (e.NewElement != null))
+            {
+                Control.ReturnKeyType = (e.NewElement as ExtendedEntry).ReturnKeyType.GetValueFromDescription();
+				ExtendedEntry entry = (ExtendedEntry)this.Element;
+				Control.ShouldReturn += (UITextField tf) =>
+				{
+					entry.InvokeCompleted();
+					return true;
+				};
+
+			}
+
 			if (e.OldElement == null)
 			{
 				_leftSwipeGestureRecognizer = new UISwipeGestureRecognizer(() => view.OnLeftSwipe(this, EventArgs.Empty))
@@ -88,6 +100,11 @@ namespace OpenMind.iOS
 				SetBorder(view);
 			if (e.PropertyName == ExtendedEntry.PlaceholderTextColorProperty.PropertyName)
 				SetPlaceholderTextColor(view);
+			if (e.PropertyName == ExtendedEntry.ReturnKeyPropertyName)
+			{
+                System.Diagnostics.Debug.WriteLine($"{(sender as ExtendedEntry).ReturnKeyType.ToString()}");
+				Control.ReturnKeyType = (sender as ExtendedEntry).ReturnKeyType.GetValueFromDescription();
+			}
 
 			ResizeHeight();
 		}
@@ -177,6 +194,32 @@ YOURTEXTFIELD.attributedPlaceholder = [[NSAttributedString alloc] initWithString
 				NSAttributedString placeholderString = new NSAttributedString(view.Placeholder, new UIStringAttributes() { ForegroundColor = view.PlaceholderTextColor.ToUIColor() });
 				Control.AttributedPlaceholder = placeholderString;
 			}
+		}
+
+
+	}
+	public static class EnumExtensions
+	{
+		public static UIReturnKeyType GetValueFromDescription(this ReturnKeyTypes value)
+		{
+			var type = typeof(UIReturnKeyType);
+			if (!type.IsEnum) throw new InvalidOperationException();
+			foreach (var field in type.GetFields())
+			{
+				var attribute = Attribute.GetCustomAttribute(field,
+					typeof(DescriptionAttribute)) as DescriptionAttribute;
+				if (attribute != null)
+				{
+					if (attribute.Description == value.ToString())
+						return (UIReturnKeyType)field.GetValue(null);
+				}
+				else
+				{
+					if (field.Name == value.ToString())
+						return (UIReturnKeyType)field.GetValue(null);
+				}
+			}
+			throw new NotSupportedException($"Not supported on iOS: {value}");
 		}
 	}
 }

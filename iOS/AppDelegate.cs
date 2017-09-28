@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Foundation;
 using Plugin.Toasts;
+using RoundedBoxView.Forms.Plugin.iOSUnified;
 using UIKit;
 using Xamarin.Forms;
 
@@ -15,6 +16,7 @@ namespace OpenMind.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
+            RoundedBoxViewRenderer.Init();
 			DependencyService.Register<ToastNotificatorImplementation>();			
 			ToastNotificatorImplementation.Init();
 

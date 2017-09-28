@@ -15,6 +15,21 @@ namespace OpenMind.Data
             ServicioWeb = servicio;
         }
 
+        public Task<String> confirmUserAsync(confirmUser peticion)
+		{
+			return ServicioWeb.confirmUserAsync(peticion);
+		}
+
+        public Task<String> reloadmailAsync(reloadmail peticion)
+		{
+			return ServicioWeb.confirmUserAsync(peticion);
+		}
+
+        public Task<String> changepasswordAsync(changepassword peticion)
+		{
+			return ServicioWeb.changepasswordAsync(peticion);
+		}
+
         public Task<List<UsuarioRespuesta>> LoginAsync(Login peticion)
         {
             return ServicioWeb.LoginAsync(peticion);

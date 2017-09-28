@@ -9,6 +9,29 @@ namespace OpenMind.Helpers
 {
 	public class ExtendedEntry : Entry
 	{
+
+		public const string ReturnKeyPropertyName = "ReturnKeyType";
+		public new event EventHandler Completed;
+
+
+		public static readonly BindableProperty ReturnKeyTypeProperty = BindableProperty.Create(
+			propertyName: ReturnKeyPropertyName,
+			returnType: typeof(ReturnKeyTypes),
+            declaringType: typeof(ExtendedEntry),
+			defaultValue: ReturnKeyTypes.Done);
+
+		public ReturnKeyTypes ReturnKeyType
+		{
+			get { return (ReturnKeyTypes)GetValue(ReturnKeyTypeProperty); }
+			set { SetValue(ReturnKeyTypeProperty, value); }
+		}
+
+		public void InvokeCompleted()
+		{
+			if (this.Completed != null)
+				this.Completed.Invoke(this, null);
+		}
+
 		/// <summary>
 		/// The font property
 		/// </summary>
@@ -111,5 +134,21 @@ namespace OpenMind.Helpers
 				handler(this, e);
 			}
 		}
+	}
+
+	public enum ReturnKeyTypes : int
+	{
+		Default,
+		Go,
+		Google,
+		Join,
+		Next,
+		Route,
+		Search,
+		Send,
+		Yahoo,
+		Done,
+		EmergencyCall,
+		Continue
 	}
 }

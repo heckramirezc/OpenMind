@@ -23,6 +23,55 @@ namespace OpenMind.Modelos.Usuario
 		}
 	}
 
+    public class changepassword
+    {
+        public string actualpass { get; set; }
+        public string confirmpass { get; set; }
+        public string newpass { get; set; }
+        public string user { get; set; }
+		/*public string parametros
+		{
+			get
+			{
+                return
+                      "&actualpass=" + actualpass
+                    + "&confirmpass=" + confirmpass
+                    + "&newpass=" + newpass
+                    + "&user=" + user;
+			}
+		}*/
+    }
+
+	public class reloadmail
+	{
+		public string nocarnet { get; set; }
+        /*
+		public string parametros
+		{
+			get
+			{
+				return
+					"grant_type=password"
+					+ "&username=" + username;
+			}
+		}*/
+	}
+
+	public class confirmUser
+	{
+		public string username { get; set; }
+		public string parametros
+		{
+			get
+			{
+				return
+					"grant_type=password"
+					+ "&username=" + username;
+			}
+		}
+	}
+
+
 	public class UsuarioRespuesta
 	{
 		public string access_token { get; set; }

@@ -40,16 +40,27 @@ namespace OpenMind.Paginas.Principal
             await Navigation.PopModalAsync();
 		}
 
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            Perfill();
+        }
+
+        public async void Perfill()
+        {
+            if (CurrentPage == perfil)
+                await Navigation.PushModalAsync(new MiPerfil());                           
+        }
+
 		async public void MostrarEntrada()
 		{
             CurrentPage = entrada;
             await Navigation.PopModalAsync();
 		}
-    }
 
-	/*private async void ShowToast(ToastNotificationType type, string titulo, string descripcion, int tiempo)
-	{
-		var notificator = DependencyService.Get<IToastNotificator>();
-		bool tapped = await notificator.Notify(type, titulo, descripcion, TimeSpan.FromSeconds(tiempo));
-	}*/
+        async protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+    }
 }

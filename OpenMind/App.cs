@@ -37,6 +37,11 @@ namespace OpenMind
                 Sesion();
 			});
 
+            MessagingCenter.Subscribe<CambioContrasenia>(this, "Autenticado", (sender) =>
+			{
+				Sesion();
+			});
+
 			MessagingCenter.Subscribe<MiPerfil>(this, "NoAutenticado", (sender) =>
 			{
                 Settings.session_access_token = String.Empty;

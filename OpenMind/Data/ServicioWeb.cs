@@ -27,13 +27,74 @@ namespace Medicloud.Data
         public List<AlumnoRespuesta> Alumno { get; private set; }
         public List<FAQsRespuesta> FAQs { get; private set; }
 
-		public ServicioWeb()
-		{
-			cliente = new HttpClient();
-			cliente.MaxResponseContentBufferSize = 256000;
-			cliente.Timeout = TimeSpan.FromSeconds(60000);
+        public ServicioWeb()
+        {
+            cliente = new HttpClient();
+            cliente.MaxResponseContentBufferSize = 256000;
+            cliente.Timeout = TimeSpan.FromSeconds(60000);
 
+        }
+
+        public async Task<String> changepasswordAsync(changepassword peticion)
+		{
+            Uri uri = new Uri(Constantes.URL_Users_changepassword);
+			try
+			{
+				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri);				
+                string json = JsonConvert.SerializeObject(peticion);				
+                var solicitud = await cliente.PostAsync(Constantes.URL_Users_changepassword, new StringContent(json, Encoding.Unicode, "application/json"));
+				System.Diagnostics.Debug.WriteLine("SOLICITUD: " + solicitud);
+				solicitud.EnsureSuccessStatusCode();
+
+				string respuesta = await solicitud.Content.ReadAsStringAsync();
+				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);				
+                return respuesta;
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("ERROR: " + e.Message);
+			}
+			return String.Empty;
 		}
+
+        public async Task<String> reloadmailAsync(reloadmail peticion)
+		{
+            Uri uri = new Uri(Constantes.URL_Users_reloadmail);
+			try
+			{
+				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri);
+				string json = JsonConvert.SerializeObject(peticion);
+                var solicitud = await cliente.PostAsync(Constantes.URL_Users_reloadmail, new StringContent(json, Encoding.Unicode, "application/json"));
+				System.Diagnostics.Debug.WriteLine("SOLICITUD: " + solicitud);
+				solicitud.EnsureSuccessStatusCode();
+
+				string respuesta = await solicitud.Content.ReadAsStringAsync();
+				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);
+				return respuesta;
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("ERROR: " + e.Message);
+			}
+			return String.Empty;
+		}
+
+        public async Task<String> confirmUserAsync(confirmUser peticion)
+        {
+			Uri uri = new Uri(Constantes.URL_Users_confirmUser);			
+			try
+			{
+				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri + peticion.parametros);
+				var respuesta = await cliente.GetStringAsync(uri + peticion.parametros);
+                return respuesta;
+				//UsuarioConfirm = JsonConvert.DeserializeObject<List<confirmUserRespuesta>>(respuesta);				
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("ERROR: " + e.Message);
+			}
+            return String.Empty;
+        }
 
 		public async Task<List<UsuarioRespuesta>> LoginAsync(Login peticion)
 		{

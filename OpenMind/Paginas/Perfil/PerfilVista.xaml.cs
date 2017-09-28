@@ -16,10 +16,10 @@ namespace OpenMind.Paginas.Perfil
         async protected override void OnAppearing()
         {
             base.OnAppearing();
-            await Navigation.PushModalAsync(new MiPerfil());
         }
+
         public void MostrarEntrada()
-		{
+		{            
 			((Principal.PrincipalTP)this.Parent).MostrarEntrada();
 		}
 

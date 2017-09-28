@@ -20,6 +20,7 @@ using OpenMind.Droid;
 using OpenMind;
 using OpenMind.Helpers;
 using Color = Xamarin.Forms.Color;
+using Android.Views.InputMethods;
 
 [assembly: ExportRenderer(typeof(ExtendedEntry), typeof(ExtendedEntryRenderer))]
 namespace OpenMind.Droid
@@ -54,9 +55,24 @@ namespace OpenMind.Droid
 
 			if (Control != null && e.NewElement != null && e.NewElement.IsPassword)
 			{
-				Control.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
+				//Control.SetTypeface(Typeface.Default, TypefaceStyle.Normal);
 				Control.TransformationMethod = new PasswordTransformationMethod();
 			}
+
+			if ((Control != null) && (e.NewElement != null))
+			{
+                var entryExt = (e.NewElement as ExtendedEntry);
+				Control.ImeOptions = entryExt.ReturnKeyType.GetValueFromDescription();
+				// This is hackie ;-) / A Android-only bindable property should be added to the EntryExt class 
+				Control.SetImeActionLabel(entryExt.ReturnKeyType.ToString(), Control.ImeOptions);
+				
+                ExtendedEntry entry = (ExtendedEntry)this.Element;
+				Control.EditorAction += (object sender, TextView.EditorActionEventArgs args) =>
+				{                    
+					entry.InvokeCompleted();
+				};
+			}
+
 
 			SetFont(view);
 			SetTextAlignment(view);
@@ -148,6 +164,17 @@ namespace OpenMind.Droid
 		{
 			var view = (ExtendedEntry)Element;
 
+			if (e.PropertyName == ExtendedEntry.ReturnKeyPropertyName)
+			{
+				var entryExt = (sender as ExtendedEntry);
+				Control.ImeOptions = entryExt.ReturnKeyType.GetValueFromDescription();
+				// This is hackie ;-) / A Android-only bindable property should be added to the EntryExt class 
+				Control.SetImeActionLabel(entryExt.ReturnKeyType.ToString(), Control.ImeOptions);
+			}
+
+			
+
+
 			if (e.PropertyName == ExtendedEntry.FontProperty.PropertyName)
 			{
 				SetFont(view);
@@ -235,6 +262,31 @@ namespace OpenMind.Droid
 		private void SetMaxLength(ExtendedEntry view)
 		{
 			Control.SetFilters(new IInputFilter[] { new InputFilterLengthFilter(view.MaxLength) });
+		}
+	}
+
+	public static class EnumExtensions
+	{
+		public static ImeAction GetValueFromDescription(this ReturnKeyTypes value)
+		{
+			var type = typeof(ImeAction);
+			if (!type.IsEnum) throw new InvalidOperationException();
+			foreach (var field in type.GetFields())
+			{
+				var attribute = Attribute.GetCustomAttribute(field,
+					typeof(DescriptionAttribute)) as DescriptionAttribute;
+				if (attribute != null)
+				{
+					if (attribute.Description == value.ToString())
+						return (ImeAction)field.GetValue(null);
+				}
+				else
+				{
+					if (field.Name == value.ToString())
+						return (ImeAction)field.GetValue(null);
+				}
+			}
+			throw new NotSupportedException($"Not supported on Android: {value}");
 		}
 	}
 }

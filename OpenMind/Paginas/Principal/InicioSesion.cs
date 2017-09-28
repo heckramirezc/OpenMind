@@ -5,33 +5,35 @@ using OpenMind.Modelos.Usuario;
 using System.Collections.Generic;
 using System.Linq;
 using Plugin.Toasts;
+using Rg.Plugins.Popup.Extensions;
 
 namespace OpenMind.Paginas.Principal
 {
     public class InicioSesion : ContentPage
     {
         ExtendedEntry Usuario, Contrasenia;
-		Label forget;
+		Label forget, contactenos;
 		Button login;
         public InicioSesion()
         {
 			Usuario = new ExtendedEntry()
 			{
 				AutomationId = "LoginUser",
-				Keyboard = Keyboard.Email,
+                Keyboard = Keyboard.Telephone,
 				Placeholder = "USUARIO",
 				PlaceholderColor = Color.FromHex("91a5af"),
 				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
 				TextColor = Color.FromHex("CDCDCD"),
                 BackgroundColor = Color.Transparent,
 				Text = string.Empty,
-                FontSize = 22,
-				HeightRequest = 50,
+                FontSize = Device.OnPlatform(16, 22, 12),
+				HeightRequest = Device.OnPlatform(40, 50, 12),
 				HasBorder = false,
                 Margin = new Thickness(15,0),
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,
+                ReturnKeyType = ReturnKeyTypes.Next
 			};
-
+            Usuario.Completed+= (sender, e) => { /*Usuario.Unfocus();*/  Contrasenia.Focus();};
             Contrasenia = new ExtendedEntry()
             {
                 AutomationId = "LoginPass",
@@ -41,29 +43,15 @@ namespace OpenMind.Paginas.Principal
                 TextColor = Color.FromHex("CDCDCD"),
                 BackgroundColor = Color.Transparent,
                 Text = string.Empty,
-				FontSize = 22,
-				HeightRequest = 50,
+				FontSize = Device.OnPlatform(16,22, 12),
+				HeightRequest = Device.OnPlatform(40, 50, 12),
 				HasBorder = false,
 				Margin = new Thickness(15, 0),
                 VerticalOptions = LayoutOptions.Center,
-
+                IsPassword = true,
+                ReturnKeyType = ReturnKeyTypes.Go
 			};
-            Contrasenia.TextChanged+= (sender, e) => 
-            {
-                if(!Contrasenia.IsPassword)
-                {
-                    Contrasenia.IsPassword = true;
-                    Contrasenia.Text = String.Empty;
-                    Contrasenia.Text = e.NewTextValue;
-				}
-            };
-            /*Usuario.Unfocused+= (sender, e) => 
-            {                
-                    
-            };*/
-            /*Contrasenia.Focused+= (sender, e) => { Contrasenia.IsPassword = true; };*/
-
-				//var rond = ;
+            Contrasenia.Completed += (sender, e) => { Contrasenia.Unfocus(); Login(); };
 
 				var ingreso = new StackLayout
 			{
@@ -76,7 +64,7 @@ namespace OpenMind.Paginas.Principal
 					//Usuario,
                     new Grid
                     {
-                        HeightRequest = 50,
+                        HeightRequest = Device.OnPlatform(40,50, 12),
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         Children =
                         {
@@ -85,8 +73,8 @@ namespace OpenMind.Paginas.Principal
                 				BackgroundColor = Color.Transparent,
                 				BorderThickness = 2,
                 				CornerRadius = 20,
-                				BorderColor = Color.White,
-                				HeightRequest = 50,
+                				BorderColor = Color.FromHex("94a8c1"),
+                				HeightRequest = Device.OnPlatform(40,50, 12),
                 				HorizontalOptions = LayoutOptions.FillAndExpand,
                 			},
                             Usuario
@@ -94,7 +82,7 @@ namespace OpenMind.Paginas.Principal
                     },
 					new Grid
 					{
-                        HeightRequest = 50,
+                        HeightRequest = Device.OnPlatform(40,50, 12),
 						Children =
 						{
 							new RoundedBoxView.Forms.Plugin.Abstractions.RoundedBoxView
@@ -102,8 +90,8 @@ namespace OpenMind.Paginas.Principal
 								BackgroundColor = Color.Transparent,
 								BorderThickness = 2,
 								CornerRadius = 20,
-								BorderColor = Color.White,
-								HeightRequest = 50,
+                                BorderColor = Color.FromHex("94a8c1"),
+								HeightRequest = Device.OnPlatform(40,50, 12),
 								//WidthRequest = 128,
 							},
 							Contrasenia
@@ -127,11 +115,12 @@ namespace OpenMind.Paginas.Principal
 			{                
 				Source = "logo.png",
                 HorizontalOptions = LayoutOptions.Center,
-                WidthRequest = 250
+                Margin = new Thickness(50,0)
 			};
             
 			var content_ingreso = new StackLayout
-			{                
+			{   
+                VerticalOptions = LayoutOptions.CenterAndExpand,
 				Spacing = 25,				
 				Children = { logo, fIngreso }
 			};
@@ -163,7 +152,18 @@ namespace OpenMind.Paginas.Principal
 			};
 			indicador.SetBinding(ActivityIndicator.IsVisibleProperty, "IsBusy");
 
-			forget = new Label
+            forget = new Label
+			{
+				Text = "Recuperar contraseña.",
+				TextColor = Color.FromHex("f7efd9"),
+				FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
+				FontSize = 14,
+				//Margin = new Thickness(0, 0, 0, 40),
+				//VerticalOptions = LayoutOptions.EndAndExpand,
+				HorizontalOptions = LayoutOptions.Center
+			};
+
+            contactenos = new Label
 			{                
 				Text = "¿Tienes dudas? contáctanos.",
 				TextColor = Color.FromHex("f7efd9"),
@@ -175,13 +175,13 @@ namespace OpenMind.Paginas.Principal
 			};
 			var tap = new TapGestureRecognizer();
 			tap.Tapped += (s, e) => Forget_Clicked();
-			forget.GestureRecognizers.Add(tap);
+            forget.GestureRecognizers.Add(tap);
 
             var acceso = new StackLayout
             {                
                 VerticalOptions = LayoutOptions.FillAndExpand,
-				Spacing = 40,
-				Children = { login, indicador, forget }
+				Spacing = 15,
+                Children = {new Grid{Children ={indicador, login }},forget, contactenos }
 			};
             BackgroundImage = "fondo.png";
             Content = new ScrollView
@@ -197,12 +197,18 @@ namespace OpenMind.Paginas.Principal
             };
 		}
 
-        private void Forget_Clicked()
+        private async void Forget_Clicked()
         {
-            
+            await Navigation.PushPopupAsync(new CambioContrasenia(Usuario.Text.Trim(), Contrasenia.Text.Trim()));
+            //await Navigation.PushPopupAsync(new Forget());
         }
 
-        private async void Login_Clicked(object sender, EventArgs e)
+        private void Login_Clicked(object sender, EventArgs e)
+        {			
+            Login();
+        }
+
+        public async void Login()
         {
 			if (String.IsNullOrEmpty(Usuario.Text))
 			{
@@ -210,7 +216,7 @@ namespace OpenMind.Paginas.Principal
 				Usuario.Focus();
 				return;
 			}
-			
+
 			if (String.IsNullOrEmpty(Contrasenia.Text))
 			{
 				await DisplayAlert("", "Por favor, indique su contraseña", "Aceptar");
@@ -223,8 +229,8 @@ namespace OpenMind.Paginas.Principal
 
 			Login peticion = new Login
 			{
-                username = Usuario.Text.Trim(),
-                password = Contrasenia.Text.Trim().Replace("&","%26")
+				username = Usuario.Text.Trim(),
+				password = Contrasenia.Text.Trim().Replace("&", "%26")
 			};
 			List<UsuarioRespuesta> Session = new List<UsuarioRespuesta>();
 			Session = await App.ManejadorDatos.LoginAsync(peticion);
@@ -238,21 +244,44 @@ namespace OpenMind.Paginas.Principal
 			}
 			else
 			{
-				foreach (var session in Session)
-				{                    
-                    ShowToast(ToastNotificationType.Success, "¡Bienvenido!", "Has iniciado sesión correctamente.", 7);
-					Settings.session_access_token = session.access_token;
-                    Settings.session_token_type = session.token_type;
-                    Settings.session_refresh_token = session.refresh_token;
-                    Settings.session_expires_in = session.expires_in;
-                    Settings.session_scope = session.scope;
-                    Settings.session_carne = Usuario.Text.Trim();
-		            MessagingCenter.Send<InicioSesion>(this, "Autenticado");
-				}
+                confirmUser peticion1 = new confirmUser
+				{
+					username = Usuario.Text.Trim()
+				};
+                String Session1 = String.Empty;
+                Session1 = await App.ManejadorDatos.confirmUserAsync(peticion1);				
+                if (String.IsNullOrEmpty(Session1))
+                {
+                    ShowToast(ToastNotificationType.Error, "Tenemos problemas en verificar tu cuenta.", "Inténtalo de nuevo más tarde o contáctanos.", 5);
+                    login.IsVisible = true;
+                    login.IsEnabled = true;
+                    this.IsBusy = false;
+                    return;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("llego aca");
+                    if (Session1.Equals("1"))
+                    {
+						foreach (var session in Session)
+						{
+							ShowToast(ToastNotificationType.Success, "¡Bienvenido!", "Has iniciado sesión correctamente.", 7);
+							Settings.session_access_token = session.access_token;
+							Settings.session_token_type = session.token_type;
+							Settings.session_refresh_token = session.refresh_token;
+							Settings.session_expires_in = session.expires_in;
+							Settings.session_scope = session.scope;
+							Settings.session_carne = Usuario.Text.Trim();
+							MessagingCenter.Send<InicioSesion>(this, "Autenticado");
+						}
+                    }
+                    else
+                    {
+                        await Navigation.PushPopupAsync(new CambioContrasenia(Usuario.Text.Trim(), Contrasenia.Text.Trim()));      
+                    }
+                }
 			}
-
         }
-
 		private async void ShowToast(ToastNotificationType type, string titulo, string descripcion, int tiempo)
 		{
 			var notificator = DependencyService.Get<IToastNotificator>();
