@@ -16,6 +16,7 @@ namespace OpenMind.Data
         Task<List<UsuarioRespuesta>> LoginAsync(Login peticion);
         Task GetQRAsync(EntradaQR peticion);
         Task infoAlumnoAsync(AlumnoPeticion peticion);
+        Task getCursosCatedraticoAsync(AlumnoPeticion peticion);
         Task GetFAQssync();
     }
 }

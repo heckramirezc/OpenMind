@@ -13,7 +13,8 @@ namespace OpenMind.Data
         public static string URL_Users_reloadmail = URL + "/alumno/reloadmail?";
         public static string URL_Users_confirmUser = URL + "confirmUser?";
         public static string URL_Users_changepassword = URL + "changepassword?";
-		public static string URL_Users_infoAlumno = URL + "alumno/infoalumno?";
-        public static string URL_Users_allQuestion = URL + "preguntas/allQuestion";
+        public static string URL_Users_infoAlumno = URL + "alumno/infoalumno?";
+        public static string URL_Users_getCursosCatedratico = URL + "catedratico/getCursosCatedratico?";		
+		public static string URL_Users_allQuestion = URL + "preguntas/allQuestion";
 	}
 }

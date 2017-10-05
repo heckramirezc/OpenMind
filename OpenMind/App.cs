@@ -51,6 +51,7 @@ namespace OpenMind
 				Settings.session_scope = String.Empty;
 				Settings.session_carne = String.Empty;
                 Settings.session_nombre = String.Empty;
+                Settings.session_role = string.Empty;
 				MainPage = new InicioSesion();
 			});
 
@@ -76,19 +77,28 @@ namespace OpenMind
         {
             if (!String.IsNullOrEmpty(Settings.session_carne) || !String.IsNullOrEmpty(Settings.session_access_token))
             {
-				AlumnoPeticion peticion = new AlumnoPeticion
-				{
-					nocarnet = Settings.session_carne
-				};
-				List<AlumnoRespuesta> Alumno = new List<AlumnoRespuesta>();
-				await App.ManejadorDatos.infoAlumnoAsync(peticion);
+                if (!String.IsNullOrEmpty(Settings.session_role) || !String.IsNullOrEmpty(Settings.session_role))
+                {
+                    if(Settings.session_role.Equals("E"))
+                    {
+						AlumnoPeticion peticion = new AlumnoPeticion
+						{
+							nocarnet = Settings.session_carne
+						};
+						List<AlumnoRespuesta> Alumno = new List<AlumnoRespuesta>();
+						await App.ManejadorDatos.infoAlumnoAsync(peticion);
 
-				EntradaQR peticion2 = new EntradaQR
-				{
-					nocarnet = Settings.session_carne
-				};
-
-				await App.ManejadorDatos.GetQRAsync(peticion2);
+						EntradaQR peticion2 = new EntradaQR
+						{
+							nocarnet = Settings.session_carne
+						};
+						await App.ManejadorDatos.GetQRAsync(peticion2);
+                    }
+                    else if (Settings.session_role.Equals("C"))
+                    {
+                        
+                    }
+                }				
             }
             			
 			await App.ManejadorDatos.GetFAQssync();

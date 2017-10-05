@@ -201,6 +201,56 @@ namespace Medicloud.Data
 			}			
 		}
 
+		public async Task getCursosCatedraticoAsync(AlumnoPeticion peticion)
+		{
+			App.Database.limpiarCursos();
+            Uri uri = new Uri(Constantes.URL_Users_getCursosCatedratico);
+			Alumno = new List<AlumnoRespuesta>();
+			try
+			{
+				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri + peticion.parametros);
+				var respuesta = await cliente.GetStringAsync(uri + peticion.parametros);
+				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);
+				Alumno = JsonConvert.DeserializeObject<List<AlumnoRespuesta>>(respuesta);
+				foreach (var alumno in Alumno)
+				{
+					
+                    if(!String.IsNullOrEmpty(alumno.nombres)||!string.IsNullOrEmpty(alumno.apellidos))
+                    {
+                        Settings.session_nombre = alumno.nombres + " " + alumno.apellidos;
+                    }
+
+					foreach (var asignacion in alumno.asignaciones)
+					{
+						cursos curso = new cursos
+						{
+							idCurso = asignacion.curso.idCurso,
+							nombre = asignacion.curso.nombre,
+							seccion = asignacion.curso.seccion
+						};
+						try
+						{
+							await Task.Run(() =>
+							{
+								if (App.database.InsertCursos(curso) == 1)
+									System.Diagnostics.Debug.WriteLine("CORRECTO RECETAS: ¡Se ha realizado correctamente la insersion de datos!");
+								else
+									System.Diagnostics.Debug.WriteLine("ERROR: ¡Ha ocurrido un error inesperado al insercion de datos!");
+							});
+						}
+						catch (Exception e)
+						{
+							System.Diagnostics.Debug.WriteLine("ERROR: " + e.Message);
+						}
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("ERROR: " + e.Message);
+			}
+		}
+
 		public async Task GetFAQssync()
 		{
             App.Database.limpiarFAQs();

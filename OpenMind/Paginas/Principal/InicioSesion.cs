@@ -287,6 +287,16 @@ namespace OpenMind.Paginas.Principal
 							Settings.session_expires_in = session.expires_in;
 							Settings.session_scope = session.scope;
 							Settings.session_carne = Usuario.Text.Trim();
+
+                            if(Usuario.Text.Trim().Contains("-"))
+                            {
+								Settings.session_role = "E";
+							}
+                            else
+                            {
+                                Settings.session_role = "C";
+                            }                                                        
+
 							MessagingCenter.Send<InicioSesion>(this, "Autenticado");
 						}
                     }

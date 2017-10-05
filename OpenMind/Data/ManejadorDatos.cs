@@ -49,5 +49,10 @@ namespace OpenMind.Data
         {
             return ServicioWeb.infoAlumnoAsync(peticion);
         }
+
+		public Task getCursosCatedraticoAsync(AlumnoPeticion peticion)
+		{
+			return ServicioWeb.getCursosCatedraticoAsync(peticion);
+		}
     }
 }

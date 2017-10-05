@@ -29,6 +29,7 @@ namespace OpenMind.Helpers
         private const string carne = "carne";
         private const string nombre = "nombre";
         private const string url = "url";
+        private const string role = "role";
 
         private static readonly string Predeterminado = string.Empty;
 
@@ -124,6 +125,18 @@ namespace OpenMind.Helpers
 			set
 			{
 				AppSettings.AddOrUpdateValue(url, value);
+			}
+		}
+
+		public static string session_role
+		{
+			get
+			{
+				return AppSettings.GetValueOrDefault(role, Predeterminado);
+			}
+			set
+			{
+				AppSettings.AddOrUpdateValue(role, value);
 			}
 		}
 
