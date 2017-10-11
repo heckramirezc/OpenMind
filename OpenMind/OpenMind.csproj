@@ -71,6 +71,10 @@
     <Compile Include="Paginas\Principal\Forget.cs" />
     <Compile Include="Paginas\Principal\CambioContrasenia.cs" />
     <Compile Include="ControlesPersonalizados\CustomFrame.cs" />
+    <Compile Include="Paginas\Cursos\ContenidoCursosDT.cs" />
+    <Compile Include="Paginas\Cursos\CursoAsistentesDT.cs" />
+    <Compile Include="Helpers\Indicador.cs" />
+    <Compile Include="Modelos\Alumno\AsistenciaPeticion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Plugin.Settings.Abstractions">

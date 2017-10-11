@@ -65,6 +65,32 @@ namespace OpenMind.Paginas.Cursos
 				Device.OpenUri(new Uri("https://goo.gl/F2LzXD"));
 			};
 			contactar.GestureRecognizers.Add(tap2);
+
+			Label verMas = new Label
+			{
+				FontFamily = Device.OnPlatform("OpenSans", "OpenSans-Regular", null),
+				TextColor = Color.FromHex("B2B2B2"),
+				HorizontalTextAlignment = TextAlignment.Center,
+				HorizontalOptions = LayoutOptions.Center,
+				FontSize = 10,
+				
+			};
+
+            BoxView separador = new BoxView
+            {
+                BackgroundColor = Color.FromHex("B2B2B2"),
+                VerticalOptions = LayoutOptions.End,
+                HorizontalOptions = LayoutOptions.Center,
+                WidthRequest = 70,
+                HeightRequest = 1,
+                IsVisible = false
+            };
+
+            if (Settings.session_role.Equals("C"))
+            {
+             verMas.Text = "(Presiona el contenido para ver más)";
+                separador.IsVisible = true;
+            }
 			Content = new StackLayout
 			{
 				Children =
@@ -93,7 +119,18 @@ namespace OpenMind.Paginas.Cursos
                         }
                     },
                     Contenido,
+					separador,
+                    verMas,					
+					new BoxView
+					{
+						BackgroundColor = Color.Transparent,
+						VerticalOptions = LayoutOptions.End,
+						HorizontalOptions = LayoutOptions.FillAndExpand,
+						WidthRequest = 70,
+						HeightRequest = 5
+					},
 					contactar,
+					
 					new BoxView
 					{
 						BackgroundColor = Color.FromHex("3E1152"),

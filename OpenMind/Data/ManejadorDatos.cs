@@ -50,7 +50,12 @@ namespace OpenMind.Data
             return ServicioWeb.infoAlumnoAsync(peticion);
         }
 
-		public Task getCursosCatedraticoAsync(AlumnoPeticion peticion)
+        public Task<List<AsistenciaRespuesta>> getAlumnosAsync(AsistenciaPeticion peticion)
+		{
+			return ServicioWeb.getAlumnosAsync(peticion);
+		}
+
+		public Task getCursosCatedraticoAsync(AlumnoPeticion2 peticion)
 		{
 			return ServicioWeb.getCursosCatedraticoAsync(peticion);
 		}

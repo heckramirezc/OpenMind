@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using OpenMind.ControlesPersonalizados;
 using OpenMind.Modelos.SQLite;
+using OpenMind.Paginas.Cursos;
 using Xamarin.Forms;
 
 namespace OpenMind
@@ -20,118 +21,17 @@ namespace OpenMind
 		public StackLayout Contenido
 		{
 			get
-			{
-                Grid Grid = new Grid
+			{                
+                    				
+                StackLayout ContenidoCursos = new StackLayout
                 {
-					Padding = new Thickness(20, 10, 20, 10),
-					ColumnSpacing = 5,
-                    RowSpacing = 5,
-					VerticalOptions = LayoutOptions.CenterAndExpand,
-					HorizontalOptions = LayoutOptions.CenterAndExpand,
-					RowDefinitions = {
-					new RowDefinition { Height = new GridLength (1, GridUnitType.Auto) }
-				},
-					ColumnDefinitions = {
-					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Auto) },
-					new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) }
-				}
+                    Children = 
+                    {
+                        new ContenidoCursosDT(Codigo, Seccion)
+                    }
                 };
 
-
-                Grid.Children.Add(
-					new Label
-					{
-                        Text = "Código:",
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("3E1152"),
-					}, 0,0);
-				Grid.Children.Add(
-					new Label
-					{
-                        Text = Codigo,
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("262626"),
-					}, 1, 0);
-
-				Grid.Children.Add(
-					new Label
-					{
-						Text = "Sección:",
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("3E1152"),
-					}, 0, 1);
-				Grid.Children.Add(
-					new Label
-					{
-                        Text = Seccion,
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("262626"),
-					}, 1, 1);
-				/*
-				Grid.Children.Add(
-					new Label
-					{
-						Text = "Correlativo:",
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("3E1152"),
-					}, 0, 0);
-				Grid.Children.Add(
-					new Label
-					{
-                        Text = Nombre,
-						FontSize = 14,
-						FontFamily = Device.OnPlatform("Montserrat-Regular", "Montserrat-Regular", null),
-						TextColor = Color.FromHex("CDCDCD"),
-					}, 0, 0);*/
-                    				
-				StackLayout ContenidoCursos = new StackLayout();
-
-				switch (Device.RuntimePlatform)
-				{
-					case Device.iOS:
-						ContenidoCursos = new StackLayout
-						{
-							IsVisible = true,
-							Spacing = 5,
-							VerticalOptions = LayoutOptions.FillAndExpand,
-							Children =
-							{
-								new Frame
-								{
-									Padding = new Thickness(0, 0, 0, 0),
-									OutlineColor = Color.FromHex("3E1152"),
-									HorizontalOptions = LayoutOptions.CenterAndExpand,
-									Content = Grid
-								}
-							}
-						};
-						break;
-					case Device.Android:
-						ContenidoCursos = new StackLayout
-						{
-							IsVisible = true,
-							Spacing = 5,
-							VerticalOptions = LayoutOptions.FillAndExpand,
-							Children =
-							{
-								new CustomFrame
-								{
-									Padding = new Thickness(0, 0, 0, 0),
-									OutlineColor = Color.FromHex("3E1152"),
-									HorizontalOptions = LayoutOptions.CenterAndExpand,
-									BorderRadius = Device.OnPlatform(6, 15, 12),
-									Content = Grid
-								}
-							}
-						};
-						break;
-				}
-                		
+				
 				return ContenidoCursos;
 			}
 		}

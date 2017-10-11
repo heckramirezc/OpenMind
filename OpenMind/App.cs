@@ -84,8 +84,7 @@ namespace OpenMind
 						AlumnoPeticion peticion = new AlumnoPeticion
 						{
 							nocarnet = Settings.session_carne
-						};
-						List<AlumnoRespuesta> Alumno = new List<AlumnoRespuesta>();
+						};						
 						await App.ManejadorDatos.infoAlumnoAsync(peticion);
 
 						EntradaQR peticion2 = new EntradaQR
@@ -96,7 +95,17 @@ namespace OpenMind
                     }
                     else if (Settings.session_role.Equals("C"))
                     {
-                        
+						AlumnoPeticion2 peticion = new AlumnoPeticion2
+						{
+                            idCatedratico = Settings.session_carne
+						};
+                        await App.ManejadorDatos.getCursosCatedraticoAsync(peticion);
+
+						EntradaQR peticion2 = new EntradaQR
+						{
+							nocarnet = Settings.session_carne
+						};
+						await App.ManejadorDatos.GetQRAsync(peticion2);
                     }
                 }				
             }

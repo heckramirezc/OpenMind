@@ -24,6 +24,7 @@ namespace Medicloud.Data
         HttpClient cliente;
         public List<UsuarioRespuesta> Usuario { get; private set; }
         public List<EntradaQRRespuesta> QR { get; private set; }
+        public List<AsistenciaRespuesta> Asistentes { get; private set; }
         public List<AlumnoRespuesta> Alumno { get; private set; }
         public List<FAQsRespuesta> FAQs { get; private set; }
 
@@ -200,28 +201,52 @@ namespace Medicloud.Data
 				Debug.WriteLine("ERROR: " + e.Message);
 			}			
 		}
+        public async Task<List<AsistenciaRespuesta>> getAlumnosAsync(AsistenciaPeticion peticion)
+        {
+            Uri uri = new Uri(Constantes.URL_Users_getAlumnos);
+            Asistentes = new List<AsistenciaRespuesta>();
+            List<AsistenciaRespuesta> AsistentesReturn = new List<AsistenciaRespuesta>();
 
-		public async Task getCursosCatedraticoAsync(AlumnoPeticion peticion)
+			try
+			{
+                System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri + peticion.idCurso);
+                var respuesta = await cliente.GetStringAsync(uri + peticion.idCurso);
+				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);
+				Asistentes = JsonConvert.DeserializeObject<List<AsistenciaRespuesta>>(respuesta);
+				foreach (var asistente in Asistentes)
+				{
+                    if (asistente.pagado.Equals("1"))
+                        AsistentesReturn.Add(asistente);
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("ERROR: " + e.Message);
+			}
+            return AsistentesReturn;
+        }
+
+		public async Task getCursosCatedraticoAsync(AlumnoPeticion2 peticion)
 		{
 			App.Database.limpiarCursos();
             Uri uri = new Uri(Constantes.URL_Users_getCursosCatedratico);
-			Alumno = new List<AlumnoRespuesta>();
+			AlumnoRespuesta1 Alumno1 = new AlumnoRespuesta1();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine("PARAMETROS: " + uri + peticion.parametros);
 				var respuesta = await cliente.GetStringAsync(uri + peticion.parametros);
-				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);
-				Alumno = JsonConvert.DeserializeObject<List<AlumnoRespuesta>>(respuesta);
-				foreach (var alumno in Alumno)
+				System.Diagnostics.Debug.WriteLine("RESPUESTA: " + respuesta);				                                              
+				Alumno1 = JsonConvert.DeserializeObject<AlumnoRespuesta1>(respuesta);
+				if (!String.IsNullOrEmpty(Alumno1.nombres) || !string.IsNullOrEmpty(Alumno1.apellidos))
 				{
-					
-                    if(!String.IsNullOrEmpty(alumno.nombres)||!string.IsNullOrEmpty(alumno.apellidos))
-                    {
-                        Settings.session_nombre = alumno.nombres + " " + alumno.apellidos;
-                    }
+					Settings.session_nombre = Alumno1.nombres + " " + Alumno1.apellidos;
+				}
 
-					foreach (var asignacion in alumno.asignaciones)
-					{
+
+				foreach (var asignacion1 in Alumno1.asignaciones)
+				{
+                    foreach (var asignacion in asignacion1)
+                    {
 						cursos curso = new cursos
 						{
 							idCurso = asignacion.curso.idCurso,
@@ -241,9 +266,16 @@ namespace Medicloud.Data
 						catch (Exception e)
 						{
 							System.Diagnostics.Debug.WriteLine("ERROR: " + e.Message);
-						}
-					}
+						}   
+                    }					
 				}
+                /*foreach (var alumno in Alumno1)
+				{
+					
+                    
+
+					
+				}*/
 			}
 			catch (Exception e)
 			{
