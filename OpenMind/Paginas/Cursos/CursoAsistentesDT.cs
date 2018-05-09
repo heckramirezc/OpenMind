@@ -114,7 +114,7 @@ namespace OpenMind.Paginas.Cursos
         							HorizontalTextAlignment = TextAlignment.Center,
         							HorizontalOptions = LayoutOptions.Center,
         							FontSize = 8,
-        							Text = "Los alumnos estudiantes listados ya han realizado el pago del evento."
+        							Text = "Los estudiantes listados ya han realizado el pago del evento."
         						},
         						new Label
         						{

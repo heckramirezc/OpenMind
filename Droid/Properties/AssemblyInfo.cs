@@ -18,7 +18,7 @@ using Android.App;
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion("1.0.2")]
+[assembly: AssemblyVersion("1.1.0")]
 #if DEBUG
 [assembly: Application(Debuggable=true)]
 #else
